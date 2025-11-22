@@ -7,6 +7,22 @@ namespace Combat
     public class ButtonCombatDispararCannon : BaseButtonAttendant
     {
         [SerializeField] CombatManager combatManager;
+
+        private void Start()
+        {
+            buttonComponent.onClick.AddListener(Shot);
+        }
+
+        private void Shot() 
+        {
+            if (combatManager.Current != null)
+            { 
+                var stats = combatManager.Current.Stats;
+                combatManager.Target.MakeDamage(3,stats.Precision);
+                combatManager.Target.QuadOn.ReduceCobertura(0.1f);
+            }
+        }
+
         private void Update()
         {
             if (combatManager.Current != null)

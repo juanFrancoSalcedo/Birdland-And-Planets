@@ -128,7 +128,7 @@ public class CannonsDataHandler
 
             CannonWrapper loadedData = JsonUtility.FromJson<CannonWrapper>(jsonToLoad);
 
-            Debug.Log("Datos cargados desde: " + filePath);
+            Debug.Log("Cannnos Datos cargados desde: " + filePath);
             return loadedData;
         }
         catch (System.Exception e)

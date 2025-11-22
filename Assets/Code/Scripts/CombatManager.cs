@@ -6,11 +6,12 @@ namespace Combat
 { 
     public class CombatManager : Singleton<CombatManager>
     {
-        [SerializeField] CombatCharacterTripulante[] barcoUno;
-        [SerializeField] CombatCharacterTripulante[] barcoDos;
+        [SerializeField] TripulanteCombatHandler[] barcoUno;
+        [SerializeField] TripulanteCombatHandler[] barcoDos;
         [SerializeField] GameObject panelAttack;
 
-        public CombatCharacterTripulante Current;
+        public TripulanteCombatHandler Current;
+        public TripulanteCombatHandler Target;
         private void Start() 
         {
 

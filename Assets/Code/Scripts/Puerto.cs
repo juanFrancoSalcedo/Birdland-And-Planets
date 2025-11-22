@@ -3,19 +3,29 @@ using UnityEngine;
 
 public class Puerto : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+
+    [SerializeField] TriggerDetector triggerDetector;
+
+
+    private void OnEnable()
     {
-        if (other.CompareTag("BarcoMio"))
-        {
-            ShipUIFacade.Instance.ShowPort();
-        }
+        triggerDetector.OnTriggerEntered += Show;
+        triggerDetector.OnTriggerExited += Hide;
     }
 
-    private void OnTriggerExit(Collider other)
+    private void Show(Transform transform)
     {
-        if (other.CompareTag("BarcoMio"))
-        {
-            ShipUIFacade.Instance.HidePort();
-        }
+        ShipUIFacade.Instance.ShowPort();
+    }
+
+    private void Hide(Transform transform)
+    {
+        ShipUIFacade.Instance.HidePort();
+    }
+
+    private void OnDisable()
+    {
+        triggerDetector.OnTriggerEntered -= Show;
+        triggerDetector.OnTriggerExited -= Hide;
     }
 }
