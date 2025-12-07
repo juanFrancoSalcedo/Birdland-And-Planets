@@ -4,8 +4,14 @@ using Zenject;
 
 public class FishBank : MonoBehaviour
 {
-    [Inject] FoodMediator mediator;
+    FoodMediator mediator;
     [SerializeField] TriggerDetector triggerDetector;
+
+    [Inject]
+    public void Construct(FoodMediator mediator) 
+    {
+        this.mediator = mediator;
+    }
 
 
     private void OnEnable()
@@ -16,7 +22,6 @@ public class FishBank : MonoBehaviour
     private void CheckCollision(Transform transform)
     {
         gameObject.SetActive(false);
-        //print("Consumi u pescadito");
         mediator.SumFish(10f);
     }
 
@@ -25,4 +30,5 @@ public class FishBank : MonoBehaviour
         triggerDetector.OnTriggerEntered -= CheckCollision;
     }
 
+    public class Factory: PlaceholderFactory<FishBank>{}
 }

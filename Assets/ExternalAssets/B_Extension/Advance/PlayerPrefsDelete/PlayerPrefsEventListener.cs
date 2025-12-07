@@ -47,7 +47,10 @@ public class PlayerPrefsEventListener : MonoBehaviour
     public void CheckExist()
     {
         if (PlayerPrefs.HasKey(key))
+        {
+            OnExistKey?.Invoke(true);
             onExistKey?.Invoke();
+        }
         else
             onExistKey?.Invoke();
     }

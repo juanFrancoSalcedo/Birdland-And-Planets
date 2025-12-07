@@ -28,6 +28,11 @@ public class ShipView : MonoBehaviour
     public void LoadCannons() 
     {
         var wrapper = CannonsDataHandler.LoadData();
+        if (wrapper.Cannons.Count == 0)
+        {
+            print("Load canons, doesnt exists canons");
+            return;
+        }
         for (int i = 0; i < Cannons.Count; i++)
         {
             Cannons[i].Cannon = wrapper.Cannons[i].Copy();

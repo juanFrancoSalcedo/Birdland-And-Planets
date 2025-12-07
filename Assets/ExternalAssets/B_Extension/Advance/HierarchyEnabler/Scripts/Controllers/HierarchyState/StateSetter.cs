@@ -15,7 +15,6 @@ namespace B_Extensions.HierarchyStates
         [SerializeField] private float timeDelay = 0f;
         [SerializeField] public StateReference reference = null;
         public static event System.Action<StateReference> OnEnabled;
-        bool lastState = false;
         private void OnValidate()
         {
             #if UNITY_EDITOR

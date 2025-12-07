@@ -54,7 +54,7 @@ namespace B_Extensions.HierarchyStates
             );
 
 #else
-            var elementsFound = GameObject.FindObjectsOfType<StateSetter>(true);
+            var elementsFound = GameObject.FindObjectsByType<StateSetter>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             return System.Array.Find(elementsFound, item => 
                 item.reference.UniqueId.Equals(this.UniqueId)
             );

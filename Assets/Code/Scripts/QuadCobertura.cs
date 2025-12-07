@@ -1,4 +1,5 @@
 using Combat;
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,6 +9,8 @@ public class QuadCobertura : MonoBehaviour
     [SerializeField] private bool isCannon = false;
     [SerializeField] private bool isCannonLoaded = false;
     TripulanteCombatHandler tripulanteHandler;
+
+    public bool IsCannonLoaded => isCannonLoaded;
     public void SetTripulantePlace(TripulanteCombatHandler tripulante) 
     {
         tripulanteHandler = tripulante;
@@ -38,6 +41,11 @@ public class QuadCobertura : MonoBehaviour
         if (CombatManager.Instance.Current)
         {
             SetTripulantePlace(CombatManager.Instance.Current);
+            tripulanteHandler.
         }
     }
+
+    internal void ShotCannon() => isCannonLoaded = false;
+
+    internal void ReloadCanon() => isCannonLoaded = true;
 }

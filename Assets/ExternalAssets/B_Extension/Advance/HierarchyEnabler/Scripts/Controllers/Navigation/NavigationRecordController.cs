@@ -15,7 +15,7 @@ namespace B_Extensions.HierarchyStates
         /// first list layer, is the records storage, second layer is for each GameObject on scene
         /// </summary>
         private static List<List<RecordElement>> record = new List<List<RecordElement>>();
-        public static event System.Action OnElementsInSceneUpated = null;
+        
         public HierarchyActivator Activator => transform.GetComponentInChildren<HierarchyActivator>();
         public NavigationRecordSearch Searcher => transform.GetComponentInChildren<NavigationRecordSearch>();
 
@@ -25,14 +25,7 @@ namespace B_Extensions.HierarchyStates
             base.Awake();
             transform.SetParent(null);
         }
-        private void OnLevelWasLoaded(int level)
-        {
-            // Check the name of the scene is the same than taken by record element
-            if (SceneManager.GetActiveScene().name.Equals(record.Last()[0].reference.sceneName))
-            {
-                StartCoroutine(ListenAmountOfSingleton());
-            }
-        }
+        
 
         private void Update()
         {
@@ -42,8 +35,18 @@ namespace B_Extensions.HierarchyStates
                 //record.Last().ForEach(r => print(r.reference.handler.name));
             }
         }
+        private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
+
+        private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
         #endregion
 
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (SceneManager.GetActiveScene().name.Equals(record.Last()[0].reference.sceneName))
+            {
+                StartCoroutine(ListenAmountOfSingleton());
+            }
+        }
         public void ScanElements()
         {
             record.Add(GetListElementsInScene());
@@ -119,7 +122,7 @@ namespace B_Extensions.HierarchyStates
             }
 
 #else
-            var elementsFound = GameObject.FindObjectsOfType<StateSetter>(true);
+            var elementsFound = GameObject.FindObjectsByType<StateSetter>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             foreach (var item in elementsFound)
             {
                 // ignore objects

@@ -6,11 +6,13 @@ public class ShipMovement : MonoBehaviour
     // Variables de configuración
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float rotationSpeed = 100f;
-
     // Variables internas para el movimiento y la rotación
     private Vector2 _movementInput;
     private PlayerInputActions _playerInputActions;
-    private Rigidbody _rb; // Opcional, pero recomendado para movimiento físico
+    private Rigidbody _rb;
+
+    public static event System.Action<Transform> OnMove;
+
 
     private void Awake()
     {
@@ -40,6 +42,7 @@ public class ShipMovement : MonoBehaviour
     private void OnMovePerformed(InputAction.CallbackContext context)
     {
         _movementInput = context.ReadValue<Vector2>();
+        OnMove?.Invoke(transform);
     }
 
     // Se llama cuando la acción 'Move' se cancela (se sueltan las teclas)

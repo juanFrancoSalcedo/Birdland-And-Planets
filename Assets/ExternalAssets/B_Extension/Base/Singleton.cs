@@ -14,7 +14,7 @@ namespace B_Extensions
             {
                 if (instance == null)
                 {
-                    var buffer = FindObjectsOfType<T>();
+                    var buffer = FindObjectsByType<T>(FindObjectsInactive.Include,FindObjectsSortMode.None);
                     if (buffer.Length > 1)
                     {
                         Debug.LogWarning($"[{typeof(T)}] There are more than one instance in scene, are have been deleted.");
@@ -22,7 +22,7 @@ namespace B_Extensions
                         instance = buffer[0];
                     }
                     else
-                        instance = FindObjectOfType<T>();
+                        instance = FindFirstObjectByType<T>();
 
                     if (instance == null)
                         Debug.LogError($"Instance of type {typeof(T)} not found. Make sure it's on the scene.");
@@ -40,7 +40,7 @@ namespace B_Extensions
         protected virtual void Awake()
         {
             if (!dontDestroyOnLoad) return;
-            if (FindObjectsOfType<T>().Length > 1)
+            if (FindObjectsByType<T>(FindObjectsInactive.Include, FindObjectsSortMode.None).Length > 1)
                 Destroy(gameObject);
             else
                 DontDestroyOnLoad(gameObject);

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Linq;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -173,8 +174,8 @@ public class FormController : MonoBehaviour, IFormControllable
 
 
     public async void Submit()
-    {      
-        
+    {
+        await Task.Delay(200);
     }
     
 }

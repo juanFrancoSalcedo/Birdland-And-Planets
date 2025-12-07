@@ -20,13 +20,18 @@ namespace Combat
                 var stats = combatManager.Current.Stats;
                 combatManager.Target.MakeDamage(3,stats.Precision);
                 combatManager.Target.QuadOn.ReduceCobertura(0.1f);
+                combatManager.Current.QuadOn.ShotCannon();
             }
         }
 
         private void Update()
         {
             if (combatManager.Current != null)
-                buttonComponent.interactable = combatManager.Current.CanAttackDispararCannon();
+            { 
+                buttonComponent.interactable = combatManager.Current.CanAttackDispararCannon() &&
+                    combatManager.Current.QuadOn.IsCannonLoaded;
+            
+            }
         }
     }
 }

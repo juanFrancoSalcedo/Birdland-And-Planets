@@ -109,8 +109,8 @@ MonoBehaviour:
   bloomThreshold:
     m_OverrideState: 1
     m_Value:
-      minValue: 1
-      maxValue: 2.4185514
+      minValue: 1.2136189
+      maxValue: 2.311744
   bloomScattering:
     m_OverrideState: 1
     m_Value: 5.92
