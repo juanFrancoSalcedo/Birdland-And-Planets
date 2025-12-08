@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Chunk 2
   m_EditorClassIdentifier: Assembly-CSharp::ChunkController
   data:
-    gridCordenadasX: 0
-    gridCordenadasZ: 0
+    sites:
+    - position: {x: 0, y: -9}
+      typeStaticEvents: 1

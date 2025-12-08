@@ -4,20 +4,16 @@ using Zenject;
 
 public class FishBank : MonoBehaviour
 {
-    FoodMediator mediator;
     [SerializeField] TriggerDetector triggerDetector;
+    FoodMediator mediator;
 
     [Inject]
     public void Construct(FoodMediator mediator) 
     {
         this.mediator = mediator;
     }
-
-
-    private void OnEnable()
-    {
-        triggerDetector.OnTriggerEntered += CheckCollision;
-    }
+    private void OnEnable() => triggerDetector.OnTriggerEntered += CheckCollision;
+    private void OnDisable() => triggerDetector.OnTriggerEntered -= CheckCollision;
 
     private void CheckCollision(Transform transform)
     {
@@ -25,10 +21,6 @@ public class FishBank : MonoBehaviour
         mediator.SumFish(10f);
     }
 
-    private void OnDisable()
-    {
-        triggerDetector.OnTriggerEntered -= CheckCollision;
-    }
 
     public class Factory: PlaceholderFactory<FishBank>{}
 }

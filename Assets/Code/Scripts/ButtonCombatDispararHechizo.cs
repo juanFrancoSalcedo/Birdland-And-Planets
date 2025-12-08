@@ -10,7 +10,7 @@ namespace Combat
         private void Update()
         {
             if (combatManager.Current != null)
-                buttonComponent.interactable = combatManager.Current.CanAttackDispararHechizo();
+                buttonComponent.interactable = combatManager.Current.CanAttackDispararHechizo() && combatManager.Current.CanEffortTurn();
         }
     }
 }

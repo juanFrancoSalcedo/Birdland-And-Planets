@@ -21,8 +21,10 @@ namespace Combat
 
         private void Attack()
         {
+            var tripula = combatManager.Current;
             var stats = combatManager.Current.Stats;
             combatManager.Target.MakeDamage(stats.BaseAttack, stats.Precision);
+            tripula.DebtEffort();
         }
     }
 }

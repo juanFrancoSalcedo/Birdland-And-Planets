@@ -1,12 +1,16 @@
 using UnityEditor;
 using UnityEngine;
+using Zenject;
 
 public class Puerto : MonoBehaviour
 {
-
     [SerializeField] TriggerDetector triggerDetector;
 
-
+    [Inject]
+    public void Construct(FoodMediator mediator)
+    {
+        //this.mediator = mediator;
+    }
     private void OnEnable()
     {
         triggerDetector.OnTriggerEntered += Show;
@@ -28,4 +32,7 @@ public class Puerto : MonoBehaviour
         triggerDetector.OnTriggerEntered -= Show;
         triggerDetector.OnTriggerExited -= Hide;
     }
+
+    public class Factory : PlaceholderFactory<Puerto> { }
+
 }

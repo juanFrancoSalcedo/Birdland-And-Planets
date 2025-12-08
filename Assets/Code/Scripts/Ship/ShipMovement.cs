@@ -3,56 +3,33 @@ using UnityEngine.InputSystem;
 
 public class ShipMovement : MonoBehaviour
 {
-    // Variables de configuración
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float rotationSpeed = 100f;
-    // Variables internas para el movimiento y la rotación
+    [SerializeField] private bool isMobile;
+    [Header("MobileSettings")]
+    [SerializeField] private Timon timon;
+    [SerializeField] private ToggleSails sails;
     private Vector2 _movementInput;
-    private PlayerInputActions _playerInputActions;
     private Rigidbody _rb;
-
     public static event System.Action<Transform> OnMove;
-
-
+    IInputShip currentInput;
     private void Awake()
     {
-        _playerInputActions = new PlayerInputActions();
-        _rb = GetComponent<Rigidbody>(); // Obtiene el Rigidbody si existe
-    }
 
-    private void OnEnable()
-    {
-        // Habilita el mapa de acciones 'Player'
-        _playerInputActions.Player.Enable();
-
-        _playerInputActions.Player.Move.performed += OnMovePerformed;
-        _playerInputActions.Player.Move.canceled += OnMoveCanceled;
-    }
-
-    private void OnDisable()
-    {
-        // Desuscribirse y deshabilitar
-        _playerInputActions.Player.Move.performed -= OnMovePerformed;
-        _playerInputActions.Player.Move.canceled -= OnMoveCanceled;
-
-        _playerInputActions.Player.Disable();
-    }
-
-    // Se llama cuando la acción 'Move' se activa
-    private void OnMovePerformed(InputAction.CallbackContext context)
-    {
-        _movementInput = context.ReadValue<Vector2>();
-        OnMove?.Invoke(transform);
-    }
-
-    // Se llama cuando la acción 'Move' se cancela (se sueltan las teclas)
-    private void OnMoveCanceled(InputAction.CallbackContext context)
-    {
-        _movementInput = Vector2.zero;
+        if (isMobile)
+            currentInput = new ShipScreenMobileMovementAdapter(timon, sails);
+        else
+        { 
+            timon.gameObject.SetActive(false);
+            sails.gameObject.SetActive(false);
+            currentInput = new ShipKeyboardMovementAdapter(OnMove,transform);
+        }
+        _rb = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
     {
+        _movementInput = currentInput.GetDirection();
         if (_movementInput.y < 0)
             return;
 

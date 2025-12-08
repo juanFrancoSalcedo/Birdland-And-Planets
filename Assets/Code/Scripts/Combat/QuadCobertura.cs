@@ -40,8 +40,11 @@ public class QuadCobertura : MonoBehaviour
     {
         if (CombatManager.Instance.Current)
         {
-            SetTripulantePlace(CombatManager.Instance.Current);
-            tripulanteHandler.
+            if (CombatManager.Instance.Current.CanEffortTurn())
+            {
+                SetTripulantePlace(CombatManager.Instance.Current);
+                tripulanteHandler.DebtEffort();
+            } 
         }
     }
 

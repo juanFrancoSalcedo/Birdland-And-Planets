@@ -16,14 +16,18 @@ namespace Combat
 
         private void ReloadCannon()
         {
+            var tripula = combatManager.Current;
             if (combatManager.Current != null)
+            { 
+                tripula.DebtEffort();
                 combatManager.Current.QuadOn.ReloadCanon();
+            }
         }
 
         private void Update()
         {
             if (combatManager.Current != null)
-                buttonComponent.interactable = combatManager.Current.CanRecargarCannon();
+                buttonComponent.interactable = combatManager.Current.CanRecargarCannon() && combatManager.Current.CanEffortTurn();
         }
     }
 }

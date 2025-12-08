@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   <controller>k__BackingField: {fileID: 11400000, guid: e8db64bc4297c1340b00737cf672039b, type: 2}
+  isActive: 0
 --- !u!1 &203542781315643801
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   <controller>k__BackingField: {fileID: 11400000, guid: 541869c08e060f84787ef79f90608323, type: 2}
+  isActive: 0
 --- !u!1 &1470232395723297579
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   <controller>k__BackingField: {fileID: 11400000, guid: 7f5ffccd516c2664fbfd938fa668f1c4, type: 2}
+  isActive: 0
 --- !u!1 &3164254506197134093
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,6 +607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   <controller>k__BackingField: {fileID: 11400000, guid: 0ec42a95ceb61e94a97767b2d577eae7, type: 2}
+  isActive: 0
 --- !u!1 &4069624751706300775
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,6 +743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   <controller>k__BackingField: {fileID: 11400000, guid: 986609887333f2d4eb0708f387c84c90, type: 2}
+  isActive: 0
 --- !u!1 &5394016479781173074
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,7 +770,7 @@ Transform:
   m_GameObject: {fileID: 5394016479781173074}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 50, y: 0, z: -1}
+  m_LocalPosition: {x: 129.8, y: 0, z: 77.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -785,6 +790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   <controller>k__BackingField: {fileID: 11400000, guid: 5c25029f21e5fdc44b523df986d7faa2, type: 2}
+  isActive: 0
 --- !u!1 &5410240139987176276
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,6 +837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   <controller>k__BackingField: {fileID: 11400000, guid: 2ea48333e089b264fb3cb82e22035a8e, type: 2}
+  isActive: 0
 --- !u!1 &5835587320934347164
 GameObject:
   m_ObjectHideFlags: 0
@@ -966,6 +973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   <controller>k__BackingField: {fileID: 11400000, guid: 3f50f84f1d0049b4f8c1644b8f822687, type: 2}
+  isActive: 0
 --- !u!1 &6400212473847500972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,6 +1020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   <controller>k__BackingField: {fileID: 11400000, guid: f9a411575f41e2d4fb92f0d2141a091b, type: 2}
+  isActive: 0
 --- !u!1 &7342664634878288613
 GameObject:
   m_ObjectHideFlags: 0

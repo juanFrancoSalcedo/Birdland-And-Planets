@@ -6,8 +6,10 @@ public class GameBinding : MonoInstaller
     [SerializeField] FoodMediator foodMediator;
     [SerializeField] GameClock gameClock;
     [SerializeField] TripulantesPool pool;
-    [Header("M")]
+    [Header("Factories")]
     [SerializeField] FishBank bankPrototype;
+    [SerializeField] Puerto puertoPrototype;
+    [SerializeField] CombatIncurtionStarter combatIncurtionPrototype;
 
     public override void InstallBindings()
     {
@@ -15,5 +17,7 @@ public class GameBinding : MonoInstaller
         Container.Bind<GameClock>().FromInstance(gameClock).AsSingle().NonLazy();
         Container.Bind<TripulantesPool>().FromInstance(pool).AsSingle().NonLazy();
         Container.BindFactory<FishBank, FishBank.Factory>().FromComponentInNewPrefab(bankPrototype);
+        Container.BindFactory<Puerto, Puerto.Factory>().FromComponentInNewPrefab(puertoPrototype);
+        Container.BindFactory<CombatIncurtionStarter, CombatIncurtionStarter.Factory>().FromComponentInNewPrefab(combatIncurtionPrototype);
     }
 }

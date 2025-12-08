@@ -10,32 +10,51 @@ public class ChunkView : MonoBehaviour
     [field:SerializeField] public ChunkController controller { get; set; }
     [SerializeField] private bool isActive;
     private FishBank.Factory _fishFactory;
+    private Puerto.Factory _portFactory;
+    private CombatIncurtionStarter.Factory _incurtionStarter;
     bool firstInstance;
 
 
     [Inject]
-    public void Construct(FishBank.Factory factory) 
+    public void Construct(FishBank.Factory factoryFish, Puerto.Factory port, CombatIncurtionStarter.Factory factoryIncursion) 
     {
-        this._fishFactory = factory;
+        this._fishFactory = factoryFish;
+        this._portFactory = port;
+        this._incurtionStarter = factoryIncursion;
     }
 
-    public void CreateFishBank(Vector2 pos2d) 
+    public void CreateFishBank(Vector2 pos2d)
     {
         FishBank bank = _fishFactory.Create();
-        bank.transform.position = transform.position + new Vector3(pos2d.x,0,pos2d.y);
+        bank.transform.position = RealtivePos(pos2d);
     }
 
-    private void OnEnable()
+
+    public void CreatePort(Vector2 pos2d)
     {
-        ShipMovement.OnMove += CheckWich;
+        Puerto bank = _portFactory.Create();
+        bank.transform.position = RealtivePos(pos2d);
     }
 
-    private void OnDisable()
+    public void CreateIncursion(Vector2 pos2d)
     {
-        ShipMovement.OnMove -= CheckWich;
+        var incurtion = _incurtionStarter.Create();
+        incurtion.transform.position = RealtivePos(pos2d);
     }
 
-    internal void CheckWich(Transform player)
+    public void CreateNoDependencyObject(string path, Vector2 pos2d) 
+    {
+        var reso = Resources.Load<GameObject>(path);
+        var obj = Instantiate(reso);
+        obj.transform.position = RealtivePos(pos2d);
+    }
+    private Vector2 RealtivePos(Vector2 pos2d) => transform.position + new Vector3(pos2d.x, 0, pos2d.y);
+
+    private void OnEnable() => ShipMovement.OnMove += CheckWhich;
+
+    private void OnDisable() => ShipMovement.OnMove -= CheckWhich;
+
+    internal void CheckWhich(Transform player)
     {
         float distance = Vector3.Distance(player.position, transform.position);
 
@@ -65,7 +84,10 @@ public class ChunkModel
 
 public enum TypeStaticSite 
 {
-    FishBank
+    FishBank,
+    Port,
+    Asteroid,
+    CombatIncursion
 }
 
 [System.Serializable]

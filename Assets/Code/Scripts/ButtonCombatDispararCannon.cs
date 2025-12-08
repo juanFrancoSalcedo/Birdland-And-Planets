@@ -17,10 +17,12 @@ namespace Combat
         {
             if (combatManager.Current != null)
             { 
+                var tripula = combatManager.Current;
                 var stats = combatManager.Current.Stats;
                 combatManager.Target.MakeDamage(3,stats.Precision);
                 combatManager.Target.QuadOn.ReduceCobertura(0.1f);
                 combatManager.Current.QuadOn.ShotCannon();
+                tripula.DebtEffort();
             }
         }
 
@@ -29,7 +31,7 @@ namespace Combat
             if (combatManager.Current != null)
             { 
                 buttonComponent.interactable = combatManager.Current.CanAttackDispararCannon() &&
-                    combatManager.Current.QuadOn.IsCannonLoaded;
+                    combatManager.Current.QuadOn.IsCannonLoaded && combatManager.Current.CanEffortTurn();
             
             }
         }

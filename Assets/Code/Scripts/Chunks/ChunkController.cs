@@ -16,16 +16,37 @@ public class ChunkController : ScriptableObject
             {
                 view.CreateFishBank(item.position);
             }
+
+            if (item.typeStaticEvents == TypeStaticSite.Port)
+            {
+                view.CreatePort(item.position);
+            }
+
+            if (item.typeStaticEvents == TypeStaticSite.Asteroid)
+            {
+                view.CreateNoDependencyObject(Constants.pathStormAsteroids,item.position);
+            }
+
+            if (item.typeStaticEvents == TypeStaticSite.CombatIncursion)
+            {
+                view.CreateIncursion(item.position);
+            }
         }
     }
 
     public void ActiveChunk() 
     {
-        Debug.Log("Active");
+        //Debug.Log("Active");
     }
 
     public void DeactiveChunk()
     {
-        Debug.Log("Deactive");
+        //Debug.Log("Deactive");
     }
+}
+
+
+public static class Constants 
+{
+    public const string pathStormAsteroids = "Travel/AsteroidStorm";
 }
