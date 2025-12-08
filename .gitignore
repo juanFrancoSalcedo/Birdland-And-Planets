@@ -13,3 +13,4 @@ UpgradeLog.htm
 .vscode
 !Assets/**/*~
 Assets/Unity.VisualScripting.Generated*
+.vs
