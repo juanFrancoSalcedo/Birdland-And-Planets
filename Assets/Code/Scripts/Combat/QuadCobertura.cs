@@ -1,4 +1,5 @@
 using Combat;
+using DG.Tweening;
 using System;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -14,12 +15,17 @@ public class QuadCobertura : MonoBehaviour
     public void SetTripulantePlace(TripulanteCombatHandler tripulante) 
     {
         tripulanteHandler = tripulante;
-        tripulanteHandler.ModifyCover(cobertura);
+        print("Toodo tenemos que desactivar el click para que no hagan click sobre otro");
         var vector = new Vector3(0, tripulante.transform.localScale.y / 2f, 0);
-        tripulanteHandler.transform.position = transform.position + vector;
+        tripulante.Move(transform.position + vector, SetPlaceOnTripulante);
         SetScale(Vector3.one *2);
-        tripulante.OnCannon = isCannon;
-        tripulante.QuadOn = this;
+    }
+
+    public void SetPlaceOnTripulante() 
+    {
+        tripulanteHandler.ModifyCover(cobertura);
+        tripulanteHandler.OnCannon = isCannon;
+        tripulanteHandler.QuadOn = this;
     }
 
     private void SetScale(Vector3 scale) 
@@ -42,8 +48,13 @@ public class QuadCobertura : MonoBehaviour
         {
             if (CombatManager.Instance.Current.CanEffortTurn())
             {
-                SetTripulantePlace(CombatManager.Instance.Current);
-                tripulanteHandler.DebtEffort();
+                if(CombatManager.Instance.Current.CanMoveToQuad(this))
+                {
+                    SetTripulantePlace(CombatManager.Instance.Current);
+                    tripulanteHandler.DebtEffort();
+                }
+                    
+                
             } 
         }
     }

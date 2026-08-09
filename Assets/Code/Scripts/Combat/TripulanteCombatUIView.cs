@@ -59,7 +59,6 @@ namespace Combat
         private void DrawEffortTime(int index,float t) 
         {
             effortBars[index].color = colDone;
-            print(index+" "+effortBars.Length);
             if (index < effortBars.Length)
             { 
                 effortBars[index].fillAmount = Mathf.Lerp(0, 1, t);

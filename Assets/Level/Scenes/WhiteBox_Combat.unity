@@ -1468,6 +1468,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1602757370310789929, guid: c92c3a739734e42629504f6dc7eb3929, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 63.279785
+      objectReference: {fileID: 0}
     - target: {fileID: 5337482375079468190, guid: c92c3a739734e42629504f6dc7eb3929, type: 3}
       propertyPath: m_Name
       value: Scene Loader
@@ -2107,7 +2111,7 @@ GameObject:
   - component: {fileID: 867503026}
   - component: {fileID: 867503025}
   - component: {fileID: 867503028}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: QuadCobertura (Enemy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3466,10 +3470,11 @@ GameObject:
   - component: {fileID: 1294762157}
   - component: {fileID: 1294762161}
   - component: {fileID: 1294762160}
-  - component: {fileID: 1294762159}
   - component: {fileID: 1294762158}
-  m_Layer: 0
-  m_Name: Quad (1)
+  - component: {fileID: 1294762162}
+  - component: {fileID: 1294762163}
+  m_Layer: 8
+  m_Name: Radar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3507,32 +3512,10 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!64 &1294762159
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1294762156}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1294762160
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3589,6 +3572,43 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294762156}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1294762162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294762156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc693ed2290ee7446b63a1b203defa65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  minDistanceWalk: 11
+--- !u!114 &1294762163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294762156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 739c83fc01895b64d8c274f0f58e7096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TriggerDetector
+  detectionLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1301122008
 GameObject:
   m_ObjectHideFlags: 0
@@ -4680,7 +4700,7 @@ GameObject:
   - component: {fileID: 1819401183}
   - component: {fileID: 1819401182}
   - component: {fileID: 1819401185}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: QuadCobertura (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4913,7 +4933,7 @@ GameObject:
   - component: {fileID: 1915088598}
   - component: {fileID: 1915088600}
   - component: {fileID: 1915088601}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: QuadCobertura
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5155,7 +5175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52dc5bb3450be6441be265bd851b38f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Combat.AutomaticSetIA
-  combatiente: {fileID: 2061888501}
+  IATripulante: {fileID: 2061888501}
+  targetPlayer: {fileID: 2102024437}
   quadCobertura: {fileID: 867503026}
 --- !u!4 &1978172367
 Transform:
@@ -5297,7 +5318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ff380838d92e34e97e951e2175e20b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Combat.TripulanteCombatHandler
-  rasgos: 
+  rasgos: 00000000
   stats:
     HP: 60
     BaseAttack: 1
@@ -5307,6 +5328,7 @@ MonoBehaviour:
     TimeReloadEffort: 24
   <QuadOn>k__BackingField: {fileID: 0}
   <OnCannon>k__BackingField: 0
+  <RadarMovement>k__BackingField: {fileID: 0}
   aliade: 0
 --- !u!1 &2085626352
 GameObject:
@@ -5509,7 +5531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ff380838d92e34e97e951e2175e20b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Combat.TripulanteCombatHandler
-  rasgos: 
+  rasgos: 0100000007000000
   stats:
     HP: 60
     BaseAttack: 0
@@ -5519,6 +5541,7 @@ MonoBehaviour:
     TimeReloadEffort: 14
   <QuadOn>k__BackingField: {fileID: 0}
   <OnCannon>k__BackingField: 0
+  <RadarMovement>k__BackingField: {fileID: 1294762162}
   aliade: 1
 --- !u!1 &2122743503
 GameObject:
@@ -5532,7 +5555,7 @@ GameObject:
   - component: {fileID: 2122743505}
   - component: {fileID: 2122743504}
   - component: {fileID: 2122743507}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: QuadCobertura (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

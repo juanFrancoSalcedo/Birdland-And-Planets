@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -12,6 +13,8 @@ namespace Combat
         [SerializeField] TripulanteCombatStats stats;
         [field:SerializeField] public QuadCobertura QuadOn { get; set; }
         [field: SerializeField] public bool OnCannon { get; set; } = false;
+        [field:SerializeField] public RadarCobertura RadarMovement { get; set; }
+
         public bool aliade = false;
 
         TripulanteCombatStats inGameStats;
@@ -33,6 +36,7 @@ namespace Combat
             if (aliade)
             {
                 CombatManager.Instance.Current = this;
+                RadarMovement.ActiveRadar();
             }
             else
             {
@@ -58,7 +62,6 @@ namespace Combat
             var random = Random.Range(0,100);
             if (random <= result)
             {
-                print("entramos con "+random+" de "+result);
                 inGameStats.HP -= dmg;
                 OnHpChanged?.Invoke(inGameStats.HP, stats.HP);
                 if (inGameStats.HP <=0)
@@ -119,11 +122,17 @@ namespace Combat
             }
         }
 
+        public void Move(Vector3 positionTarget, System.Action oncomplete)
+        {
+            transform.DOMove(positionTarget,1f).OnComplete(()=>oncomplete?.Invoke());
+        }
+
         public bool CanAttackAbordar() => rasgos.Contains(Rasgo.Abordador);
         public bool CanAttackDisparar() => rasgos.Contains(Rasgo.Arquero) || rasgos.Contains(Rasgo.Hunter);
         public bool CanAttackDispararHechizo() => rasgos.Contains(Rasgo.Energizador);
-        public bool CanAttackDispararCannon() => OnCannon;
+        public bool CanAttackDispararCannon() => OnCannon; //TODO Agregar rasgo artillero
         public bool CanRecargarCannon() => OnCannon && !QuadOn.IsCannonLoaded;
+        internal bool CanMoveToQuad(QuadCobertura quadCobertura)=> RadarMovement.CanReach(quadCobertura);
     }
 }
 

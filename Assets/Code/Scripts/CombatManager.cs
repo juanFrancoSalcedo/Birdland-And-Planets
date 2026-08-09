@@ -12,10 +12,6 @@ namespace Combat
 
         public TripulanteCombatHandler Current;
         public TripulanteCombatHandler Target;
-        private void Start() 
-        {
-
-        }
 
         public void ShowUI() 
         {
